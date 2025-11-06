@@ -1,5 +1,20 @@
 # TrabalhoWEB
 
+## 📂 Estrutura de Arquivos
+
+O código fonte está organizado da seguinte maneira para garantir a modularidade e a fácil manutenção:
+
+* meu-projeto-web/
+* ├── ´.git/´
+* ├── ´css/´
+* │   └── ´estilos.css´
+* ├── ´img/´
+* ├── ´js/´
+* │   └── ´scripts.js´
+* ├── ´.gitignore´
+* ├── ´index.html´
+* └── ´LEIAME.txt´
+
 ## 👤 Autores
 
 <table>
