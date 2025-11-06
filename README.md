@@ -1,4 +1,12 @@
-# TrabalhoWEB
+# A DEFINIR 
+
+![Status do Projeto](https://img.shields.io/badge/status-em%20desenvolvimento-yellowgreen)
+![Linguagem](https://img.shields.io/badge/WEB-Dev-blue.svg)
+![Licença](https://img.shields.io/badge/licen%C3%A7a-MIT-green)
+
+> Projeto acadêmico da disciplina de Desenvolvimento WEB do IFMG - Campus Formiga. Um sistema A DEFINIR, desenvolvido em HTML, CSS e JavaScript.
+
+---
 
 ## 📂 Estrutura de Arquivos
 
@@ -13,7 +21,7 @@ O código fonte está organizado da seguinte maneira para garantir a modularidad
 ├── `index.html`
 └── `LEIAME.txt`
 
-___
+---
 
 ## 👤 Autores
 
