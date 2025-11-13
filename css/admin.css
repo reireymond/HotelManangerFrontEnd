@@ -1,0 +1,12 @@
+.card-admin-tabela {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border: none;
+}
+
+.footer-admin {
+    background-color: #343a40; /* Mesmo bg-dark da navbar */
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    margin-top: 40px;
+}
