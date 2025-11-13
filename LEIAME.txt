@@ -1,9 +1,32 @@
 -Título do Projeto:
-(A definir)
+Hotel Fênix
 
 -Equipe:
 Kaua Teixeira Nascimento
 Camily Leal Silva
 
 -Descrição das funcionalidades:
-(A definir)
+Sistema de front-end para o Hotel Fênix (fictícil), dividido em duas áreas:
+
+1. Área do Cliente (main.html, quartos.html):
+   - Visualização da página inicial com quartos em destaque.
+   - Navegação com menu e barra lateral de informações (Offcanvas).
+   - Página de listagem de todas as acomodações.
+
+2. Área Administrativa (admin.html):
+   - Painel de administração com estatísticas (Total, Disponíveis, Ocupados).
+   - Gerenciamento (Adicionar, Alterar, Excluir) de quartos.
+
+3. Sistema de Login (index.html):
+   - Validação de usuários (admin, kaua, camily).
+   - Telas conceituais para "Criar Conta" e "Esqueci a Senha".
+        - Administração
+        login: admin 
+        senha: fenix
+        - Usuário
+        login: kaua 
+        senha: 123
+
+4. Persistência de Dados:
+   - O sistema usa localStorage para salvar os quartos cadastrados.
+   - O sistema usa sessionStorage para controlar o login do usuário.
