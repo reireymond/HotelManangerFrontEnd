@@ -1,5 +1,22 @@
 /* css/global.css */
 
+:root {
+  --bs-primary: #5e2a1c;
+  --bs-primary-rgb: 94, 42, 28;
+
+  --bs-secondary: #c86b4a;
+  --bs-secondary-rgb: 200, 107, 74;
+
+  --bs-dark: #421f15;
+  --bs-dark-rgb: 66, 31, 21;
+
+  --bs-body-bg: #f5efe6;
+  --bs-body-color: #421f15;
+
+  --bs-link-color: #5e2a1c;
+  --bs-link-hover-color: #c86b4a;
+}
+
 html,
 body {
   height: 100%;
@@ -8,7 +25,6 @@ body {
 }
 
 body {
-  background-color: #f8f9fa;
   min-height: 100vh;
 }
 

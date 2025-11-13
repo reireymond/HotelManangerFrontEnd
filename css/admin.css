@@ -35,7 +35,7 @@
 
 #sidebar-wrapper .nav-link.active {
   color: #fff;
-  background-color: #0d6efd;
+  background-color: var(--bs-primary);
   font-weight: 600;
 }
 
