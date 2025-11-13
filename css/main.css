@@ -80,3 +80,20 @@
   margin-right: 0.5rem;
   width: 20px;
 }
+
+.btn-primary {
+  background: linear-gradient(90deg, #8b3e2f, #5e2a1c);
+  border-color: #5e2a1c;
+  color: #f5efe6;
+  font-weight: 600;
+  transition: transform 0.12s, box-shadow 0.12s;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background: linear-gradient(90deg, #8b3e2f, #5e2a1c);
+  border-color: #421f15;
+  color: #c86b4a;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(75, 47, 32, 0.2);
+}
