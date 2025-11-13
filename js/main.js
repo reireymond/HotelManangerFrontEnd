@@ -36,7 +36,7 @@ $(document).ready(function () {
             </p>
           </div>
           <div class="card-footer bg-white border-top-0 d-flex justify-content-between align-items-center">
-            <span class="fs-5 fw-bold text-success">${precoFormatado}</span>
+            <span class="fs-5 fw-bold text-primary">${precoFormatado}</span>
             <a href="quartos.html" class="btn btn-primary">Reservar</a>
           </div>
         </div>
