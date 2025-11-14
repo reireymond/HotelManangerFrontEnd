@@ -24,6 +24,7 @@
   color: #adb5bd;
   padding: 0.75rem 1.25rem;
   font-weight: 500;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
 #sidebar-wrapper .nav-link:hover {
@@ -52,7 +53,7 @@
   border: none;
   border-radius: 0.5rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s;
+  transition: transform 0.3s ease-in-out;
 }
 
 .stat-card:hover {

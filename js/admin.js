@@ -1,5 +1,3 @@
-// js/admin.js
-
 let modalQuartoBootstrap;
 
 function atualizarStats() {
@@ -62,11 +60,28 @@ function isIdDuplicado(idNovo, idAntigo = null) {
 }
 
 $(document).ready(function () {
+  function atualizarMenuAtivo() {
+    const paginaAtual = window.location.pathname.split("/").pop();
+    const menuLinks = $("#admin-menu .nav-link");
+
+    menuLinks.removeClass("active");
+
+    menuLinks.each(function () {
+      const linkHref = $(this).attr("href").split("/").pop();
+      if (linkHref === paginaAtual) {
+        $(this).addClass("active");
+      }
+    });
+  }
+
+  atualizarMenuAtivo();
+
   carregarDados();
 
-  modalQuartoBootstrap = new bootstrap.Modal("#modalQuarto");
-
-  renderizarTabela();
+  if ($("#modalQuarto").length > 0) {
+    modalQuartoBootstrap = new bootstrap.Modal("#modalQuarto");
+    renderizarTabela();
+  }
 
   $("#btnAdicionarQuarto").on("click", function () {
     $("#modalQuartoLabel").text("Adicionar Novo Quarto");

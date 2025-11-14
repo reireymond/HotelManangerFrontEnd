@@ -15,7 +15,13 @@
     <link rel="stylesheet" href="../css/global.css" />
     <link rel="stylesheet" href="../css/main.css" />
   </head>
-  <body class="d-flex flex-column">
+
+  <body
+    class="d-flex flex-column"
+    data-bs-spy="scroll"
+    data-bs-target="#sidebarInfo"
+    tabindex="0"
+  >
     <div
       class="offcanvas offcanvas-start bg-dark text-white"
       tabindex="-1"
@@ -36,8 +42,8 @@
       <div class="offcanvas-body d-flex flex-column p-0">
         <nav class="nav nav-pills flex-column p-3">
           <a
-            class="nav-link text-white-50 active"
-            href="main.html"
+            class="nav-link text-white-50"
+            href="#secao-hero"
             data-bs-dismiss="offcanvas"
           >
             <i class="bi bi-house-fill me-2"></i> Início
@@ -113,7 +119,7 @@
     </header>
 
     <main>
-      <section class="hero-section d-flex align-items-center">
+      <section id="secao-hero" class="hero-section d-flex align-items-center">
         <div class="container text-center text-white">
           <h1 class="display-3 fw-bold">Conforto e Sofisticação</h1>
           <p class="lead col-lg-6 mx-auto">
@@ -140,7 +146,7 @@
           <div class="row align-items-center">
             <div class="col-lg-6 mb-4 mb-lg-0">
               <img
-                src="../img/lobby.jpg"
+                src="../img/lobby.jpeg"
                 class="img-fluid quemsomos-img"
                 alt="Lobby do Hotel Fênix"
               />

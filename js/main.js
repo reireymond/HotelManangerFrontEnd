@@ -1,5 +1,3 @@
-// js/main.js
-
 function verificarLogin() {
   const usuario = sessionStorage.getItem("usuarioLogado");
   const btnLoginLogout = $("#btn-login-logout");

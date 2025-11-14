@@ -187,7 +187,7 @@ input[type="password"] {
   background: #fff;
   font-size: 15px;
   outline: none;
-  transition: box-shadow 0.15s, transform 0.06s;
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out, border-color 0.3s ease-in-out;
 }
 
 input:focus {
@@ -229,7 +229,7 @@ input:focus {
   background: linear-gradient(90deg, var(--red-medium), var(--red-dark));
   color: var(--off-white);
   box-shadow: 0 8px 20px rgba(75, 47, 32, 0.18);
-  transition: transform 0.12s, box-shadow 0.12s;
+  transition: all 0.3s ease-in-out;
 }
 
 .btn:hover {
