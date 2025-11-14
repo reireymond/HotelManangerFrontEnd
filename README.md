@@ -38,7 +38,7 @@ Todo o projeto foi construído usando **HTML, CSS e JavaScript**, com **Bootstra
 
 1.  Clone este repositório:
     ```
-    git clone https://github.com/reireymond/SRH.git
+    git clone https://github.com/reireymond/HotelManangerFrontEnd.git
     ```
 2.  Abra o arquivo `index.html` no seu navegador.
 3.  Use um dos logins abaixo para testar:
