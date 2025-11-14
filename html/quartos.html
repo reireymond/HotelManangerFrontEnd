@@ -25,7 +25,7 @@
     >
       <div class="offcanvas-header border-bottom border-secondary">
         <h5 class="offcanvas-title" id="sidebarInfoLabel">
-          <i class="bi bi-info-circle"></i> Informações
+          <i class="bi bi-buildings-fill"></i> Hotel Fênix
         </h5>
         <button
           type="button"
@@ -34,20 +34,59 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="offcanvas-body">
-        <p>Encontre aqui tudo sobre o Hotel Fênix.</p>
-        <div class="nav nav-pills flex-column">
-          <a class="nav-link text-white-50" href="#">
+      <div class="offcanvas-body d-flex flex-column p-0">
+        <nav class="nav nav-pills flex-column p-3">
+          <a
+            class="nav-link text-white-50"
+            href="main.html"
+            data-bs-dismiss="offcanvas"
+          >
+            <i class="bi bi-house-fill me-2"></i> Início
+          </a>
+          <a
+            class="nav-link text-white-50 active"
+            href="quartos.html"
+            data-bs-dismiss="offcanvas"
+          >
+            <i class="bi bi-door-open-fill me-2"></i> Quartos
+          </a>
+          <a
+            class="nav-link text-white-50"
+            href="main.html#secao-quemsomos"
+            data-bs-dismiss="offcanvas"
+          >
             <i class="bi bi-info-square-fill me-2"></i> Quem Somos
           </a>
-          <a class="nav-link text-white-50" href="#">
+          <a
+            class="nav-link text-white-50"
+            href="main.html#secao-localizacao"
+            data-bs-dismiss="offcanvas"
+          >
             <i class="bi bi-geo-alt-fill me-2"></i> Localização
           </a>
-          <a class="nav-link text-white-50" href="#">
+          <a
+            class="nav-link text-white-50"
+            href="main.html#secao-contato"
+            data-bs-dismiss="offcanvas"
+          >
             <i class="bi bi-person-lines-fill me-2"></i> Fale Conosco
           </a>
-          <a class="nav-link text-white-50" href="#">
+          <a
+            class="nav-link text-white-50"
+            href="main.html#secao-galeria"
+            data-bs-dismiss="offcanvas"
+          >
             <i class="bi bi-camera-fill me-2"></i> Galeria de Fotos
+          </a>
+        </nav>
+
+        <div class="mt-auto p-3">
+          <a
+            href="../index.html"
+            class="btn btn-outline-light w-100"
+            id="btn-login-logout"
+          >
+            <i class="bi bi-person-circle"></i> Login
           </a>
         </div>
       </div>
@@ -70,41 +109,6 @@
             <i class="bi bi-buildings-fill"></i>
             Hotel Fênix
           </a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarPrincipal"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarPrincipal">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link" href="main.html">Início</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" href="quartos.html">Quartos</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Sobre</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Contato</a>
-              </li>
-            </ul>
-            <ul class="navbar-nav ms-auto">
-              <li class="nav-item">
-                <a
-                  href="../index.html"
-                  class="btn btn-outline-light"
-                  id="btn-login-logout"
-                >
-                  <i class="bi bi-person-circle"></i> Login
-                </a>
-              </li>
-            </ul>
-          </div>
         </div>
       </nav>
     </header>
@@ -115,11 +119,7 @@
           Nossas Acomodações
         </h2>
         <div
-          class.row
-          row-cols-1
-          row-cols-md-2
-          row-cols-lg-3
-          g-4
+          class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4"
           id="lista-quartos-container"
         ></div>
       </section>

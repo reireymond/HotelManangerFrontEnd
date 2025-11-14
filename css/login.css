@@ -238,6 +238,12 @@ input:focus {
   color: var(--red-light);
 }
 
+.btn:focus,
+.btn:active {
+  color: var(--red-light);
+  box-shadow: none;
+}
+
 .small-note {
   font-size: 13px;
   color: var(--muted);
