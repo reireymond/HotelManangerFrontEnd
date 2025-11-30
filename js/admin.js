@@ -56,6 +56,30 @@ function renderizarTabelaQuartos() {
             </tr>
         `;
     tabelaQuartos.append(linhaQuarto);
+
+    const nomeHospede = quarto.nomeHospede || quarto.usuario || "N/A";
+    const cpfHospede = quarto.cpfHospede || "-";
+
+    const linhaReserva = `
+            <tr data-id="${quarto.id}">
+                <td>${quarto.id}</td>
+                <td>${quarto.nome}</td>
+                <td>
+                    <strong>${nomeHospede}</strong><br>
+                    <small class="text-muted">${cpfHospede}</small>
+                </td>
+                <td>${checkinFormatado}</td>
+                <td>${checkoutFormatado}</td>
+                <td>${diarias}</td>
+                <td>${totalFormatado}</td>
+                <td class="text-center">
+                    <button class="btn btn-warning btn-sm btn-cancelar-reserva" data-id="${quarto.id}" title="Cancelar Reserva">
+                        <i class="bi bi-x-lg"></i> Cancelar
+                    </button>
+                </td>
+            </tr>
+        `;
+    tabelaReservas.append(linhaReserva);
   });
 
   atualizarStats();
@@ -185,7 +209,9 @@ $(document).ready(function () {
       temErro = true;
     } else if (isIdDuplicado(idNovo, idAntigo)) {
       $("#formQuartoId").addClass("is-invalid");
-      $("#id-error-feedback").text("Este Número de Quarto (ID) já está em uso.");
+      $("#id-error-feedback").text(
+        "Este Número de Quarto (ID) já está em uso."
+      );
       temErro = true;
     }
 
@@ -234,7 +260,9 @@ $(document).ready(function () {
 
   $("#tabela-admin-quartos").on("click", ".btn-excluir", function () {
     const quartoId = $(this).data("id");
-    if (confirm("Tem certeza que deseja excluir o quarto nº " + quartoId + "?")) {
+    if (
+      confirm("Tem certeza que deseja excluir o quarto nº " + quartoId + "?")
+    ) {
       const index = bancoDeDadosQuartos.findIndex((q) => q.id == quartoId);
       if (index !== -1) {
         bancoDeDadosQuartos.splice(index, 1);
@@ -247,7 +275,11 @@ $(document).ready(function () {
   $("#tabela-reservas").on("click", ".btn-cancelar-reserva", function () {
     const quartoId = $(this).data("id");
     if (
-      confirm("Tem certeza que deseja cancelar a reserva do quarto nº " + quartoId + "?")
+      confirm(
+        "Tem certeza que deseja cancelar a reserva do quarto nº " +
+          quartoId +
+          "?"
+      )
     ) {
       const reservas = carregarReservas();
       const novasReservas = reservas.filter((r) => r.id != quartoId);

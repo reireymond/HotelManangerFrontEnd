@@ -95,7 +95,20 @@ function calcularTotalReserva() {
 }
 
 $(document).ready(function () {
-  
+  $(document).on("input", "#reserva-cpf", function() {
+        let value = $(this).val().replace(/\D/g, "");
+        if (value.length > 11) value = value.slice(0, 11);
+
+        if (value.length > 9) {
+          value = value.replace(/^(\d{3})(\d{3})(\d{3})(\d{1,2}).*/, "$1.$2.$3-$4");
+        } else if (value.length > 6) {
+          value = value.replace(/^(\d{3})(\d{3})(\d{0,3}).*/, "$1.$2.$3");
+        } else if (value.length > 3) {
+          value = value.replace(/^(\d{3})(\d{0,3}).*/, "$1.$2");
+        }
+        $(this).val(value);
+    });
+
   const containerListaQuartos = $("#lista-quartos-container");
   const modalReservaElement = document.getElementById("modalReserva");
 
@@ -133,11 +146,17 @@ $(document).ready(function () {
       const quartoId = $(this).data("id");
       const quarto = bancoDeDadosQuartos.find((q) => q.id == quartoId);
       const calculo = calcularTotalReserva();
+      
+      const nomeHospede = $("#reserva-nome").val();
+      const cpfHospede = $("#reserva-cpf").val();
+
+      if (!nomeHospede || !cpfHospede) {
+        alert("Por favor, preencha o Nome do Hóspede e o CPF.");
+        return;
+      }
 
       if (!calculo.valido) {
-        alert(
-          "Datas inválidas. A data de Check-out deve ser posterior ao Check-in."
-        );
+        alert("Datas inválidas. A data de Check-out deve ser posterior ao Check-in.");
         return;
       }
 
@@ -150,33 +169,46 @@ $(document).ready(function () {
       const temConflito = reservasDoQuarto.some((reserva) => {
         const checkinReserva = new Date(reserva.checkin + "T00:00:00");
         const checkoutReserva = new Date(reserva.checkout + "T00:00:00");
-
         return checkinNovo < checkoutReserva && checkoutNovo > checkinReserva;
       });
 
       if (temConflito) {
-        alert(
-          "Erro: O quarto já está reservado para este período. Por favor, escolha outras datas."
-        );
+        alert("Erro: O quarto já está reservado para este período.");
         return;
       }
 
       if (quarto) {
-        quarto.checkin = $("#checkin-date").val();
-        quarto.checkout = $("#checkout-date").val();
-        quarto.numDiarias = calculo.diarias;
-        quarto.totalPagar = calculo.total;
-        quarto.usuario = sessionStorage.getItem("usuarioLogado");
-        reservas.push(quarto);
+        const novaReserva = {
+            ...quarto,
+            checkin: $("#checkin-date").val(),
+            checkout: $("#checkout-date").val(),
+            numDiarias: calculo.diarias,
+            totalPagar: calculo.total,
+            usuario: sessionStorage.getItem("usuarioLogado"),
+            
+            nomeHospede: nomeHospede,
+            cpfHospede: cpfHospede
+        };
+        
+        reservas.push(novaReserva);
         salvarReservas(reservas);
 
         modalReservaBootstrap.hide();
-        alert(
-          `Reserva confirmada! Total de ${calculo.diarias} diárias: ${formatarMoeda(
-            calculo.total
-          )}`
-        );
+        
+        alert(`Reserva confirmada! Total: ${formatarMoeda(calculo.total)}`);
+
+        const telefone = "5537999939309"; 
+        
+        const mensagemTexto = `Olá, eu fiz uma reserva e gostaria que comprovasse a reserva em nome de ${nomeHospede} com o cpf ${cpfHospede}, abaixo, siga o comprovante de pagamento da reserva:`;
+        
+        const textoEncoded = window.encodeURIComponent(mensagemTexto);
+        window.open(`https://wa.me/${telefone}?text=${textoEncoded}`, "_blank");
       }
+    });
+
+    modalReservaElement.addEventListener("show.bs.modal", function () {
+        $("#reserva-nome").val("");
+        $("#reserva-cpf").val("");
     });
   } 
 });
