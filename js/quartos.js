@@ -1,4 +1,5 @@
 let modalReservaBootstrap = null;
+let modalLoginRequiredBootstrap = null;
 
 function renderizarListaQuartos() {
   const container = $("#lista-quartos-container");
@@ -37,9 +38,7 @@ function renderizarListaQuartos() {
             
             <button 
                class="btn btn-primary btn-reservar"
-               data-id="${quarto.id}"
-               data-bs-toggle="modal"
-               data-bs-target="#modalReserva">
+               data-id="${quarto.id}">
               Reservar
             </button>
 
@@ -95,6 +94,7 @@ function calcularTotalReserva() {
 }
 
 $(document).ready(function () {
+
   $(document).on("input", "#reserva-cpf", function() {
         let value = $(this).val().replace(/\D/g, "");
         if (value.length > 11) value = value.slice(0, 11);
@@ -111,30 +111,51 @@ $(document).ready(function () {
 
   const containerListaQuartos = $("#lista-quartos-container");
   const modalReservaElement = document.getElementById("modalReserva");
+  const modalLoginRequiredElement = document.getElementById("modalLoginRequired");
 
   if (containerListaQuartos.length > 0) {
     renderizarListaQuartos();
   }
 
   if (modalReservaElement) {
+    modalReservaBootstrap = new bootstrap.Modal(modalReservaElement);
+  }
+  
+  if (modalLoginRequiredElement) {
+    modalLoginRequiredBootstrap = new bootstrap.Modal(modalLoginRequiredElement);
     
-    modalReservaBootstrap = new bootstrap.Modal("#modalReserva");
-
-    modalReservaElement.addEventListener("show.bs.modal", function (event) {
-      const button = $(event.relatedTarget);
-      const quartoId = button.data("id");
-      const quarto = bancoDeDadosQuartos.find((q) => q.id == quartoId);
-
-      $("#modalReservaLabel").text(`Reservar: ${quarto.nome}`);
-      $("#btn-confirmar-reserva").data("id", quartoId);
-      $("#modalReserva").data("preco-noite", quarto.precoPorNoite);
-
-      const today = getTodayString();
-      $("#checkin-date").val(today).attr("min", today);
-      $("#checkout-date").val("").attr("min", today);
-      $("#calculo-reserva").addClass("d-none");
+    $("#btn-ir-login").on("click", function() {
+        window.location.href = "../index.html";
     });
+  }
 
+  $(document).on("click", ".btn-reservar", function() {
+      const usuarioLogado = sessionStorage.getItem("usuarioLogado");
+
+      if (!usuarioLogado) {
+          modalLoginRequiredBootstrap.show();
+      } else {
+          const quartoId = $(this).data("id");
+          const quarto = bancoDeDadosQuartos.find((q) => q.id == quartoId);
+
+          if (quarto) {
+              $("#modalReservaLabel").text(`Reservar: ${quarto.nome}`);
+              $("#btn-confirmar-reserva").data("id", quartoId);
+              $("#modalReserva").data("preco-noite", quarto.precoPorNoite);
+
+              const today = getTodayString();
+              $("#checkin-date").val(today).attr("min", today);
+              $("#checkout-date").val("").attr("min", today);
+              $("#calculo-reserva").addClass("d-none");
+              $("#reserva-nome").val("");
+              $("#reserva-cpf").val("");
+
+              modalReservaBootstrap.show();
+          }
+      }
+  });
+
+  if (modalReservaElement) {
     $("#checkin-date, #checkout-date").on("change", function () {
       if ($("#checkin-date").val()) {
         $("#checkout-date").attr("min", $("#checkin-date").val());
@@ -204,11 +225,6 @@ $(document).ready(function () {
         const textoEncoded = window.encodeURIComponent(mensagemTexto);
         window.open(`https://wa.me/${telefone}?text=${textoEncoded}`, "_blank");
       }
-    });
-
-    modalReservaElement.addEventListener("show.bs.modal", function () {
-        $("#reserva-nome").val("");
-        $("#reserva-cpf").val("");
     });
   } 
 });
