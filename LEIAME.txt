@@ -6,21 +6,23 @@ Kaua Teixeira Nascimento
 Camily Leal Silva
 
 -Descrição das funcionalidades:
-Sistema de front-end para o Hotel Fênix (fictícil), dividido em duas áreas:
+Sistema de front-end para o Hotel Fênix (fictício), dividido em duas áreas:
 
-1. Área do Cliente (main.html, quartos.html):
-   - Visualização da página inicial com quartos em destaque.
+1. Área do Cliente (index.html, html/quartos.html):
+   - Visualização da página inicial (index.html) com quartos em destaque, mapa e formulário de contato.
    - Navegação com menu e barra lateral de informações (Offcanvas).
-   - Página de listagem de todas as acomodações.
+   - Página de listagem de todas as acomodações e simulação de reserva.
+   - Contador de visitas implementado na página inicial e visível no painel Admin.
 
-2. Área Administrativa (admin.html):
-   - Painel de administração com estatísticas (Total, Disponíveis, Ocupados).
+2. Área Administrativa (html/admin.html):
+   - Painel de administração com estatísticas (Total de Quartos, Disponíveis, Ocupados, Total de Visitas).
    - Gerenciamento (Adicionar, Alterar, Excluir) de quartos.
+   - Visualização de reservas e mensagens recebidas.
 
-3. Sistema de Login (index.html):
-   - Validação de usuários (admin, kaua, camily).
+3. Sistema de Login (html/login.html):
+   - Validação de usuários (admin: 1111/fenix, cliente: 12345678900/123).
    - Telas conceituais para "Criar Conta" e "Esqueci a Senha".
 
 4. Persistência de Dados:
-   - O sistema usa localStorage para salvar os quartos cadastrados.
-   - O sistema usa sessionStorage para controlar o login do usuário.
+   - O sistema usa localStorage para salvar os quartos, reservas, mensagens e contador de visitas.
+   - O sistema usa sessionStorage para controlar a sessão do usuário logado.
