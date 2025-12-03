@@ -99,6 +99,7 @@ function renderizarTabelaReservas() {
             <tr data-id="${quarto.id}">
                 <td>${quarto.id}</td>
                 <td>${quarto.nome}</td>
+                <td>${quarto.nomeHospede} / ${quarto.usuario}</td>
                 <td>${checkinFormatado}</td>
                 <td>${checkoutFormatado}</td>
                 <td>${diarias}</td>
