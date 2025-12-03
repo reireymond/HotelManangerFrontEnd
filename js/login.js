@@ -1,8 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // Obtém referências aos elementos do formulário de login
   const loginForm = document.getElementById("login-form");
   const loginError = document.getElementById("login-error");
   const usuarioInput = document.getElementById("usuario");
   
+  // Botão para mostrar/ocultar senha 
   const btnSenha = document.getElementById("btn-senha");
   const inputSenha = document.getElementById("password");
 
@@ -12,7 +14,8 @@ document.addEventListener("DOMContentLoaded", function () {
         inputSenha.type = "text";
         btnSenha.classList.remove("bi-eye-slash");
         btnSenha.classList.add("bi-eye");
-      } else {
+      } 
+      else {
         inputSenha.type = "password";
         btnSenha.classList.remove("bi-eye");
         btnSenha.classList.add("bi-eye-slash");
@@ -20,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // --- MÁSCARA PARA O CAMPO DE CPF ---
   if (usuarioInput) {
     usuarioInput.addEventListener("input", function (e) {
       let value = e.target.value;
@@ -27,7 +31,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (!temLetras) {
         let numbers = value.replace(/\D/g, "");
-        
         if (numbers.length > 11) numbers = numbers.slice(0, 11);
 
         if (numbers.length > 9) {
@@ -43,16 +46,17 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // --- PROCESSAMENTO DO LOGIN ---
   if (loginForm) {
     loginForm.addEventListener("submit", function (event) {
-      event.preventDefault();
+      event.preventDefault(); // impede recarregar página
       loginError.classList.remove("show");
 
       const usuarioDigitado = document.getElementById("usuario").value;
       const password = document.getElementById("password").value;
-
       const usuarioLimpo = usuarioDigitado.replace(/\D/g, "");
 
+      // LOGIN PARA ADMINISTRADOR
       if (
         (usuarioDigitado.toLowerCase() === "admin" || usuarioDigitado === "111") && 
         password === "fenix"
@@ -61,6 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
 
+      // LOGIN PARA USUÁRIO COMUM
       if (
         (usuarioDigitado === "00000000000" && password === "123") ||
         (usuarioLimpo === "12345678900" && password === "123")

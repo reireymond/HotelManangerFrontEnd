@@ -1,3 +1,4 @@
+//Guarda os dados dos quartos cadastrados
 const dadosIniciaisQuartos = [
   {
     id: 101,

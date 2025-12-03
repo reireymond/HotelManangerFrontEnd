@@ -1,14 +1,18 @@
+// Variável global que guardará a instância do modal do Bootstrap
 let modalQuartoBootstrap;
 
+// Carrega reservas armazenadas no LocalStorage
 function carregarReservas() {
   const dados = localStorage.getItem("hotelFenixReservas");
   return dados ? JSON.parse(dados) : [];
 }
 
+// Salva as reservas no LocalStorage
 function salvarReservas(reservas) {
   localStorage.setItem("hotelFenixReservas", JSON.stringify(reservas));
 }
 
+// Formata um número como moeda BRL
 function formatarMoeda(valor) {
   return valor.toLocaleString("pt-br", {
     style: "currency",
@@ -16,6 +20,7 @@ function formatarMoeda(valor) {
   });
 }
 
+// Atualiza os contadores/resumos do painel administrativo
 function atualizarStats() {
   const totalQuartos = bancoDeDadosQuartos.length;
   const disponiveis = bancoDeDadosQuartos.filter((q) => q.disponivel).length;
@@ -28,6 +33,7 @@ function atualizarStats() {
   $("#stat-visitas").text(totalVisitas);
 }
 
+// Renderiza a tabela de quartos no painel admin
 function renderizarTabelaQuartos() {
   const tabelaQuartos = $("#tabela-admin-quartos");
   tabelaQuartos.empty();
@@ -81,6 +87,7 @@ function renderizarTabelaReservas() {
       : "N/A";
     const diarias = quarto.numDiarias || "N/A";
 
+      // Converte strings de data para formato BR
     const checkinFormatado = quarto.checkin
       ? new Date(quarto.checkin + "T00:00:00").toLocaleDateString("pt-BR")
       : "N/A";
@@ -107,6 +114,7 @@ function renderizarTabelaReservas() {
   });
 }
 
+// Verifica se o ID já está sendo usado por outro quarto
 function isIdDuplicado(idNovo, idAntigo = null) {
   const idNovoNum = parseInt(idNovo);
   return bancoDeDadosQuartos.some((quarto) => {
@@ -117,7 +125,9 @@ function isIdDuplicado(idNovo, idAntigo = null) {
   });
 }
 
+
 $(document).ready(function () {
+    // Destaca o item do menu referente à página atual
   function atualizarMenuAtivo() {
     const paginaAtual = window.location.pathname.split("/").pop();
     const menuLinks = $("#admin-menu .nav-link");
@@ -131,13 +141,15 @@ $(document).ready(function () {
   }
 
   atualizarMenuAtivo();
-  carregarDados();
+  carregarDados(); // Carrega quartos do LocalStorage
 
+   // Se a tabela de quartos existe na página, inicializa o modal e renderiza
   if ($("#tabela-admin-quartos").length > 0) {
     modalQuartoBootstrap = new bootstrap.Modal("#modalQuarto");
     renderizarTabelaQuartos();
   }
 
+   // Se a tabela de reservas existe, renderiza
   if ($("#tabela-reservas").length > 0) {
     renderizarTabelaReservas();
   }
@@ -155,6 +167,7 @@ $(document).ready(function () {
     const quartoId = $(this).data("id");
     const quarto = bancoDeDadosQuartos.find((q) => q.id == quartoId);
 
+     // Preenche o formulário com os dados do quarto
     if (quarto) {
       $("#modalQuartoLabel").text("Alterar Quarto");
       $("#formQuartoIdAntigo").val(quarto.id);
@@ -212,6 +225,7 @@ $(document).ready(function () {
       return;
     }
 
+     // Cria o objeto com os dados do quarto
     const dadosQuarto = {
       id: parseInt(idNovo),
       nome: nome,
@@ -236,6 +250,8 @@ $(document).ready(function () {
     renderizarTabelaQuartos();
   });
 
+  //Excluir quartos
+
   $("#tabela-admin-quartos").on("click", ".btn-excluir", function () {
     const quartoId = $(this).data("id");
     if (
@@ -250,6 +266,7 @@ $(document).ready(function () {
     }
   });
 
+  //Cancela reservas
   $("#tabela-reservas").on("click", ".btn-cancelar-reserva", function () {
     const quartoId = $(this).data("id");
     if (

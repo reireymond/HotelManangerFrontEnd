@@ -4,21 +4,25 @@ function verificarLogin() {
   const usuario = sessionStorage.getItem("usuarioLogado");
   const btnLoginLogout = $("#btn-login-logout");
 
+  // Se o usuário está logado
   if (usuario) {
     btnLoginLogout.html('<i class="bi bi-box-arrow-right"></i> Sair');
     btnLoginLogout.attr("href", "#");
+
     btnLoginLogout.on("click", function (e) {
       e.preventDefault();
-      sessionStorage.removeItem("usuarioLogado");
-      window.location.reload();
+      sessionStorage.removeItem("usuarioLogado"); // Apaga sessão
+      window.location.reload(); // Recarrega página
     });
   } else {
+    // Se não estiver logado, mostra botão de Login
     btnLoginLogout.html('<i class="bi bi-person-circle"></i> Login');
-    
+
+    // Ajusta caminho dependendo da página
     if (window.location.pathname.includes("/html/")) {
-        btnLoginLogout.attr("href", "login.html");
+      btnLoginLogout.attr("href", "login.html");
     } else {
-        btnLoginLogout.attr("href", "html/login.html");
+      btnLoginLogout.attr("href", "html/login.html");
     }
   }
 }
@@ -30,16 +34,19 @@ function validacaoFormularioContato() {
     form.addEventListener(
       "submit",
       (event) => {
+        // Se os campos são inválidos, impede envio
         if (!form.checkValidity()) {
           event.preventDefault();
           event.stopPropagation();
-        } else {
-          event.preventDefault();
+        } 
+        else {
+          event.preventDefault(); 
 
           const nome = $("#contato-nome").val();
           const email = $("#contato-email").val();
           const msg = $("#contato-msg").val();
 
+          // Estrutura da mensagem
           const novaMensagem = {
             nome: nome,
             email: email,
@@ -47,6 +54,7 @@ function validacaoFormularioContato() {
             data: new Date().toLocaleString("pt-BR"),
           };
 
+          // Salva no localStorage
           const mensagens =
             JSON.parse(localStorage.getItem("hotelFenixMensagens")) || [];
           mensagens.push(novaMensagem);
@@ -56,27 +64,33 @@ function validacaoFormularioContato() {
           );
 
           alert("Mensagem enviada com sucesso! O administrador receberá em breve.");
-          
+
+          // Limpa o formulário
           form.classList.remove("was-validated");
           form.reset();
         }
 
-        form.classList.add("was-validated");
+        form.classList.add("was-validated"); // Exibe validação visual
       },
       false
     );
   });
 }
 
+
 $(document).ready(function () {
-  verificarLogin();
+  verificarLogin(); // Atualiza header conforme usuário logado
 
   if ($("#form-contato").length > 0) {
     validacaoFormularioContato();
   }
 
+
   const container = $("#featured-rooms-container");
+
   if (container.length > 0) {
+
+    // Filtra apenas quartos disponíveis e exibe só 3
     const quartosDestaque = bancoDeDadosQuartos
       .filter((q) => q.disponivel)
       .slice(0, 3);
@@ -92,16 +106,19 @@ $(document).ready(function () {
           currency: "BRL",
         });
 
+        // Ajuste automático do caminho da imagem
         let caminhoImagem = quarto.imagem;
         if (!window.location.pathname.includes("/html/")) {
-             caminhoImagem = caminhoImagem.replace("../", "");
+          caminhoImagem = caminhoImagem.replace("../", "");
         }
 
+        // Ajusta caminho de reserva conforme página atual
         let linkReserva = "html/quartos.html";
         if (window.location.pathname.includes("/html/")) {
-            linkReserva = "quartos.html";
+          linkReserva = "quartos.html";
         }
 
+        // Card do quarto
         const cardHtml = `
           <div class="col">
             <div class="card h-100">
@@ -128,34 +145,39 @@ $(document).ready(function () {
   }
 
   const sidebarElement = document.getElementById('sidebarInfo');
+
   if (sidebarElement) {
     sidebarInfoInstance = new bootstrap.Offcanvas(sidebarElement);
   }
 
+  // Navegação do menu lateral
   $('#sidebarInfo .nav-link').on('click', function(e) {
     const link = $(this);
     let href = link.attr('href');
     const isLocalAnchor = href.startsWith('#');
 
-    e.preventDefault(); 
+    e.preventDefault();
     
     if (sidebarInfoInstance) {
         sidebarInfoInstance.hide();
     }
 
     if (isLocalAnchor) {
+      // Se está em outra página dentro /html/
       if (window.location.pathname.includes("/html/") && !window.location.href.includes("index.html")) {
           window.location.href = "../index.html" + href;
           return;
       }
 
+      // Scroll suave
       const targetElement = $(href);
-      if (targetElement.length) { 
+      if (targetElement.length) {
         $('html, body').animate({
-          scrollTop: targetElement.offset().top - 56 
+          scrollTop: targetElement.offset().top - 56
         }, 500);
       }
-    } else {
+    } 
+    else {
       setTimeout(() => {
           window.location.href = href;
       }, 400);
@@ -163,15 +185,18 @@ $(document).ready(function () {
   });
 });
 
+// GOOGLE MAPS
 function initMap() {
   if ($("#mapa").length > 0) {
     const localizacaoHotel = { lat: -20.4663, lng: -45.4287 };
 
+    // Cria mapa
     const mapa = new google.maps.Map(document.getElementById("mapa"), {
       zoom: 15,
       center: localizacaoHotel,
     });
 
+    // Adiciona marcador
     const marker = new google.maps.Marker({
       position: localizacaoHotel,
       map: mapa,
